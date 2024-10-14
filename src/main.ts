@@ -12,7 +12,9 @@ header.innerHTML = gameName;
 app.append(header);
 
 const button = document.getElementById("Button1") as HTMLButtonElement;
-const counterDisplay = document.getElementById("numberCounter") as HTMLDivElement;
+const counterDisplay = document.getElementById(
+  "numberCounter",
+) as HTMLDivElement;
 
 button.innerText = "Click me 😩 ";
 button.style.padding = "10px";
