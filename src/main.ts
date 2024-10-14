@@ -25,12 +25,12 @@ button.addEventListener("click", () => {
 });
 
 function raiseCounter() {
-    counter += 1;
-    counterDisplay.textContent = `${counter} cookies `;
+  counter += 1;
+  counterDisplay.textContent = `${counter} cookies `;
 }
 
 setInterval(() => {
-    raiseCounter();
+  raiseCounter();
 }, 1000);
 
 app.append(button);
