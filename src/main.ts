@@ -21,8 +21,16 @@ button.style.padding = "10px";
 button.style.fontSize = "16px";
 
 button.addEventListener("click", () => {
-  counter += 1;
-  counterDisplay.textContent = `${counter} cookies `;
+  raiseCounter();
 });
+
+function raiseCounter() {
+    counter += 1;
+    counterDisplay.textContent = `${counter} cookies `;
+}
+
+setInterval(() => {
+    raiseCounter();
+}, 1000);
 
 app.append(button);
