@@ -43,6 +43,12 @@ h1 {
   text-align: center;
 }
 
+#numberCounter {
+  margin-top: 20px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
