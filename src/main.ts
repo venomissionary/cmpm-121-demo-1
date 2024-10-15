@@ -1,6 +1,5 @@
 import "./style.css";
-import cookiePicLocal from "./assets/cookie.png"; 
-
+import cookiePicLocal from "./assets/cookie.png";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -16,10 +15,12 @@ header.innerHTML = gameName;
 app.append(header);
 
 const button = document.getElementById("Button") as HTMLButtonElement;
-const counterDisplay = document.getElementById("numberCounter",) as HTMLDivElement;
+const counterDisplay = document.getElementById(
+  "numberCounter",
+) as HTMLDivElement;
 
 const button2 = document.createElement("Button") as HTMLButtonElement;
-button2.id = "Button"
+button2.id = "Button";
 button2.innerText = "Upgrade (cost 10)";
 button2.style.padding = "10px";
 button2.style.fontSize = "16px";
@@ -36,7 +37,7 @@ const cookiePic = document.createElement("img") as HTMLImageElement;
 cookiePic.src = cookiePicLocal;
 cookiePic.alt = "cookie";
 cookiePic.style.width = "400px";
-cookiePic.style.marginTop = "50px"
+cookiePic.style.marginTop = "50px";
 cookiePic.style.display = "block";
 cookiePic.style.marginLeft = "auto";
 cookiePic.style.marginRight = "auto";
@@ -44,17 +45,16 @@ cookiePic.style.marginRight = "auto";
 button.addEventListener("click", () => {
   raiseCounter();
   UpgradePower();
-
 });
 
 button2.addEventListener("click", () => {
-    if (counter >= 10) {
-        counter -= 10;
-        speedRate += 1;
-        counterDisplay.textContent = `${counter.toFixed(2)} cookies `;
-        UpgradePower();
-    }
-})
+  if (counter >= 10) {
+    counter -= 10;
+    speedRate += 1;
+    counterDisplay.textContent = `${counter.toFixed(2)} cookies `;
+    UpgradePower();
+  }
+});
 
 function raiseCounter() {
   counter += 1;
@@ -67,18 +67,18 @@ function counterUpdate(timeLapse: number) {
   }
 
   const delta = timeLapse - time;
-  counter += delta / 1000 * speedRate;
+  counter += (delta / 1000) * speedRate;
   counterDisplay.textContent = `${counter.toFixed(2)} cookies `;
   time = timeLapse;
   requestAnimationFrame(counterUpdate);
 }
 
 function UpgradePower() {
-    if (counter >= 10) {
-        button2.disabled = false;
-    } else {
-        button2.disabled = true;
-    }
+  if (counter >= 10) {
+    button2.disabled = false;
+  } else {
+    button2.disabled = true;
+  }
 }
 
 requestAnimationFrame(counterUpdate);
@@ -88,5 +88,5 @@ setInterval(() => {
 }, 1000);
 
 app.append(button);
-app.append(button2)
-app.append(cookiePic)
+app.append(button2);
+app.append(cookiePic);
