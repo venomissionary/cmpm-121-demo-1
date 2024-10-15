@@ -13,7 +13,9 @@ header.innerHTML = gameName;
 app.append(header);
 
 const button = document.getElementById("Button1") as HTMLButtonElement;
-const counterDisplay = document.getElementById("numberCounter",) as HTMLDivElement;
+const counterDisplay = document.getElementById(
+  "numberCounter",
+) as HTMLDivElement;
 
 button.innerText = "Click me 😩 ";
 button.style.padding = "10px";
@@ -29,15 +31,15 @@ function raiseCounter() {
 }
 
 function counterUpdate(timeLapse: number) {
-    if (time === 0) {
-        time = timeLapse
-    }
-
-    const delta = timeLapse - time;
-    counter += delta / 1000;
-    counterDisplay.textContent =  `${counter.toFixed(2)} cookies `;
+  if (time === 0) {
     time = timeLapse;
-    requestAnimationFrame(counterUpdate);
+  }
+
+  const delta = timeLapse - time;
+  counter += delta / 1000;
+  counterDisplay.textContent = `${counter.toFixed(2)} cookies `;
+  time = timeLapse;
+  requestAnimationFrame(counterUpdate);
 }
 
 requestAnimationFrame(counterUpdate);
