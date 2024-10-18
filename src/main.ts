@@ -13,18 +13,18 @@ let speedRate: number = 0;
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 
-//button, image, text elements of the page. 
+//button, image, text elements of the page.
 const button = document.createElement("Button") as HTMLButtonElement;
 
 button.innerText = "Click me 😩 ";
 button.style.padding = "15px";
 button.style.fontSize = "16px";
 
-const counterDisplay = document.createElement("counter",) as HTMLDivElement;
+const counterDisplay = document.createElement("counter") as HTMLDivElement;
 counterDisplay.id = "numberCounter";
 counterDisplay.textContent = "0 cookies";
-counterDisplay.style.marginTop = "100px"
-counterDisplay.style.fontSize = "20px"
+counterDisplay.style.marginTop = "100px";
+counterDisplay.style.fontSize = "20px";
 
 const button2 = document.createElement("Button") as HTMLButtonElement;
 button2.id = "Button";
@@ -92,8 +92,7 @@ setInterval(() => {
   raiseCounter();
 }, 1000);
 
-
-app.append(counterDisplay)
+app.append(counterDisplay);
 app.append(header);
 app.append(button);
 app.append(button2);
