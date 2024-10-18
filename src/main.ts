@@ -12,12 +12,19 @@ let speedRate: number = 0;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
-app.append(header);
 
-const button = document.getElementById("Button") as HTMLButtonElement;
-const counterDisplay = document.getElementById(
-  "numberCounter",
-) as HTMLDivElement;
+//button, image, text elements of the page. 
+const button = document.createElement("Button") as HTMLButtonElement;
+
+button.innerText = "Click me 😩 ";
+button.style.padding = "15px";
+button.style.fontSize = "16px";
+
+const counterDisplay = document.createElement("counter",) as HTMLDivElement;
+counterDisplay.id = "numberCounter";
+counterDisplay.textContent = "0 cookies";
+counterDisplay.style.marginTop = "100px"
+counterDisplay.style.fontSize = "20px"
 
 const button2 = document.createElement("Button") as HTMLButtonElement;
 button2.id = "Button";
@@ -28,10 +35,6 @@ button2.style.marginTop = "10px";
 button2.style.marginLeft = "10px";
 
 button2.disabled = true;
-
-button.innerText = "Click me 😩 ";
-button.style.padding = "15px";
-button.style.fontSize = "16px";
 
 const cookiePic = document.createElement("img") as HTMLImageElement;
 cookiePic.src = cookiePicLocal;
@@ -56,6 +59,7 @@ button2.addEventListener("click", () => {
   }
 });
 
+//raises the cookie amount after each click
 function raiseCounter() {
   counter += 1;
   counterDisplay.textContent = `${counter.toFixed(2)} cookies `;
@@ -73,6 +77,7 @@ function counterUpdate(timeLapse: number) {
   requestAnimationFrame(counterUpdate);
 }
 
+//checks counter amount for activiation
 function UpgradePower() {
   if (counter >= 10) {
     button2.disabled = false;
@@ -87,6 +92,9 @@ setInterval(() => {
   raiseCounter();
 }, 1000);
 
+
+app.append(counterDisplay)
+app.append(header);
 app.append(button);
 app.append(button2);
 app.append(cookiePic);
