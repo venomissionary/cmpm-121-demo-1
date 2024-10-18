@@ -64,7 +64,7 @@ function upgradeButton(text: string, cost: number, rate: number) {
   button2.style.marginTop = "10px";
   button2.style.marginLeft = "10px";
   button2.disabled = true;
- 
+
   button2.addEventListener("click", () => {
     if (counter >= cost) {
       counter -= cost;
@@ -76,7 +76,6 @@ function upgradeButton(text: string, cost: number, rate: number) {
 
       raiseCounter();
       enableButtons();
-
     }
   });
 
@@ -88,7 +87,6 @@ function enableButtons() {
   optionA.disabled = counter < 10;
   optionB.disabled = counter < 100;
   optionC.disabled = counter < 1000;
-  
 }
 
 //updates counters
@@ -134,5 +132,3 @@ app.append(optionC);
 app.append(speedRateDisplay);
 app.append(buyDisplay);
 app.append(cookiePic);
-
-
