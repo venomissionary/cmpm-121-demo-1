@@ -14,6 +14,14 @@ let upgradeA: number = 0;
 let upgradeB: number = 0;
 let upgradeC: number = 0;
 
+const currentCostA: number = 10;
+const currentCostB: number = 100;
+const currentCostC: number = 1000;
+
+const orginalCostA: number = currentCostA;
+const orginalCostB: number = currentCostB;
+const orginalCostC: number = currentCostC;
+
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 
@@ -51,9 +59,9 @@ buyDisplay.textContent = "Purchased - A: 0, B: 0, C: 0";
 buyDisplay.style.padding = "20px";
 
 //options for speed upgrades
-const optionA = upgradeButton("Option A (cost 10) ", 10, 0.1);
-const optionB = upgradeButton("Option B (cost 100) ", 100, 2.0);
-const optionC = upgradeButton("Option C (cost 1000) ", 10, 50.0);
+const optionA = upgradeButton("Option A (cost 10) ", orginalCostA ,  0.1);
+const optionB = upgradeButton("Option B (cost 100) ", orginalCostB, 2.0);
+const optionC = upgradeButton("Option C (cost 1000) " , orginalCostC, 50.0);
 
 //logic for upgrade buttons
 function upgradeButton(text: string, cost: number, rate: number) {
@@ -70,6 +78,11 @@ function upgradeButton(text: string, cost: number, rate: number) {
       counter -= cost;
       speedRate += rate;
 
+      cost *= 1.15; //costs of each option increases by this increment. 
+      cost = parseFloat(cost.toFixed(2));
+
+      button2.innerText = `${text.split('(')[0]}(cost ${cost.toFixed(2)})`
+
       if (rate === 0.1) upgradeA++;
       else if (rate === 2.0) upgradeB++;
       else if (rate == 50.0) upgradeC++;
@@ -84,9 +97,9 @@ function upgradeButton(text: string, cost: number, rate: number) {
 
 //opens up option when players hit the counter req
 function enableButtons() {
-  optionA.disabled = counter < 10;
-  optionB.disabled = counter < 100;
-  optionC.disabled = counter < 1000;
+  optionA.disabled = counter < orginalCostA;
+  optionB.disabled = counter < orginalCostB;
+  optionC.disabled = counter < orginalCostC;
 }
 
 //updates counters
