@@ -39,11 +39,11 @@ const counterDisplay = document.createElement("counter") as HTMLDivElement;
 counterDisplay.id = "numberCounter";
 counterDisplay.textContent = "0 cookies";
 counterDisplay.style.position = "absolute";
-counterDisplay.style.top = "40%"; 
-counterDisplay.style.left = "42.5%"; 
-counterDisplay.style.transform = "translate(-50%, -50%)"; 
-counterDisplay.style.zIndex = "2"; 
-counterDisplay.style.color = "white"; 
+counterDisplay.style.top = "40%";
+counterDisplay.style.left = "42.5%";
+counterDisplay.style.transform = "translate(-50%, -50%)";
+counterDisplay.style.zIndex = "2";
+counterDisplay.style.color = "white";
 
 //cookie image
 const cookiePic = document.createElement("img") as HTMLImageElement;
@@ -82,11 +82,11 @@ fryingPanPic.style.height = "auto";
 
 const fryingPanResizeable = document.createElement("div");
 fryingPanResizeable.style.position = "absolute";
-fryingPanResizeable.style.top = "15%"; 
-fryingPanResizeable.style.left = "52%"; 
-fryingPanResizeable.style.width = "600px"; 
+fryingPanResizeable.style.top = "15%";
+fryingPanResizeable.style.left = "52%";
+fryingPanResizeable.style.width = "600px";
 fryingPanResizeable.style.height = "auto";
-fryingPanResizeable.style.transform = "translate(-50%, -50%)"; 
+fryingPanResizeable.style.transform = "translate(-50%, -50%)";
 fryingPanResizeable.style.zIndex = "1";
 
 //purchase history counter
@@ -116,7 +116,7 @@ function upgradeButton(text: string, cost: number, rate: number) {
       speedRate += rate;
 
       //costs of each option increases by this increment.
-      cost *= 1.15; 
+      cost *= 1.15;
       cost = parseFloat(cost.toFixed(2));
 
       button2.innerText = `${text.split("(")[0]}(cost ${cost.toFixed(2)})`;
