@@ -19,10 +19,9 @@ interface item {
 }
 
 const availableItems: item[] = [
-   {name: "Fast Baking", cost: 10, rate: 0.1},
-   {name: "Faster Baking", cost: 100, rate: 2.0},
-   {name: "Fastest Baking", cost: 1000, rate: 50},
-
+  { name: "Fast Baking", cost: 10, rate: 0.1 },
+  { name: "Faster Baking", cost: 100, rate: 2.0 },
+  { name: "Fastest Baking", cost: 1000, rate: 50 },
 ];
 
 const header = document.createElement("h1");
@@ -39,11 +38,11 @@ const counterDisplay = document.createElement("counter") as HTMLDivElement;
 counterDisplay.id = "numberCounter";
 counterDisplay.textContent = "0 cookies";
 counterDisplay.style.position = "absolute";
-counterDisplay.style.top = "40%"; 
-counterDisplay.style.left = "41%"; 
-counterDisplay.style.transform = "translate(-50%, -50%)"; 
-counterDisplay.style.zIndex = "2"; 
-counterDisplay.style.color = "white"; 
+counterDisplay.style.top = "40%";
+counterDisplay.style.left = "41%";
+counterDisplay.style.transform = "translate(-50%, -50%)";
+counterDisplay.style.zIndex = "2";
+counterDisplay.style.color = "white";
 
 //cookie image
 const cookiePic = document.createElement("img") as HTMLImageElement;
@@ -70,7 +69,6 @@ function cookieAnimation() {
 
   setTimeout(() => {
     cookiePic.style.transform = "scale(1)";
-    
   }, 200);
 }
 
@@ -93,7 +91,7 @@ speedRateDisplay.textContent = "Speed Rate: 0.00 cookies per second";
 
 //purchase history counter
 const buyDisplay = document.createElement("div");
-buyDisplay.textContent ="Purchased - ";
+buyDisplay.textContent = "Purchased - ";
 buyDisplay.style.padding = "20px";
 
 //frying pan image
@@ -106,12 +104,12 @@ fryingPanPic.style.height = "auto";
 
 const fryingPanResizeable = document.createElement("div");
 fryingPanResizeable.style.position = "absolute";
-fryingPanResizeable.style.top = "10%"; 
-fryingPanResizeable.style.left = "52%"; 
-fryingPanResizeable.style.width = "600px"; 
+fryingPanResizeable.style.top = "10%";
+fryingPanResizeable.style.left = "52%";
+fryingPanResizeable.style.width = "600px";
 fryingPanResizeable.style.height = "auto";
-fryingPanResizeable.style.transform = "translate(-50%, -50%)"; 
-fryingPanResizeable.style.zIndex = "1"; 
+fryingPanResizeable.style.transform = "translate(-50%, -50%)";
+fryingPanResizeable.style.zIndex = "1";
 
 const upgradeButton: HTMLButtonElement[] = [];
 const upgradeCount: number[] = Array(availableItems.length).fill(0);
@@ -134,7 +132,7 @@ availableItems.forEach((item, index) => {
       upgradeCount[index]++;
 
       // Increase the cost after each purchase
-      item.cost *= 1.15; 
+      item.cost *= 1.15;
       item.cost = parseFloat(item.cost.toFixed(2));
       button2.innerText = `${item.name} (${item.cost.toFixed(2)} units/sec)`;
 
