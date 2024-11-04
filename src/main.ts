@@ -24,27 +24,48 @@ const availableItems: item[] = [
   { name: "Fastest Baking", cost: 1000, rate: 50 },
 ];
 
+const upgradeCount: number[] = Array(availableItems.length).fill(0);
+
+// Header
 const header = document.createElement("h1");
 header.innerHTML = gameName;
+header.style.zIndex = "3"; 
 
-//button, image, text elements of the page.
-const button = document.createElement("Button") as HTMLButtonElement;
-button.innerText = "Click me 😩 ";
-button.style.padding = "30px";
-button.style.fontSize = "16px";
+// Button and upgrade labels 
+const button = CookieButton("Click me 😩", ButtonClicks);
+const upgradeButton: HTMLButtonElement[] = [];
+availableItems.forEach((item, index) => {
+  const buttonUpgrade = CookieButton(`${item.name} (${item.cost} units/sec)`, () => UpgradeButtons(item, index));
+  buttonUpgrade.style.padding = "10px";
+  buttonUpgrade.style.fontSize = "16px";
+  buttonUpgrade.style.marginTop = "10px";
+  buttonUpgrade.style.marginLeft = "10px";
+  buttonUpgrade.disabled = true;
 
-//counter for cookies
-const counterDisplay = document.createElement("counter") as HTMLDivElement;
+  upgradeButton.push(buttonUpgrade);
+  app.append(buttonUpgrade);
+});
+
+//Button creation
+function CookieButton(text: string, onClick: () => void): HTMLButtonElement {
+  const btn = document.createElement("button");
+  btn.innerText = text;
+  btn.addEventListener("click", onClick);
+  return btn;
+}
+
+// Counter for cookies
+const counterDisplay = document.createElement("div") as HTMLDivElement;
 counterDisplay.id = "numberCounter";
 counterDisplay.textContent = "0 cookies";
 counterDisplay.style.position = "absolute";
 counterDisplay.style.top = "40%";
-counterDisplay.style.left = "41%";
+counterDisplay.style.left = "40%";
 counterDisplay.style.transform = "translate(-50%, -50%)";
-counterDisplay.style.zIndex = "2";
+counterDisplay.style.zIndex = "3";
 counterDisplay.style.color = "white";
 
-//cookie image
+// Cookie Image
 const cookiePic = document.createElement("img") as HTMLImageElement;
 cookiePic.src = cookiePicLocal;
 cookiePic.alt = "cookie";
@@ -54,15 +75,7 @@ cookiePic.style.display = "block";
 cookiePic.style.marginLeft = "auto";
 cookiePic.style.marginRight = "auto";
 
-//manual click button events
-button.addEventListener("click", () => {
-  counter++;
-  updateDisplay();
-  enableButtons();
-  cookieAnimation();
-});
-
-//cookie animation
+// Cookie Animation Function
 function cookieAnimation() {
   cookiePic.style.transition = "transform 0.2s";
   cookiePic.style.transform = "scale(1.2)";
@@ -72,7 +85,7 @@ function cookieAnimation() {
   }, 200);
 }
 
-//background setting image
+// Background Image
 const kitchenPic = document.createElement("img") as HTMLImageElement;
 kitchenPic.src = kitchenPicLocal;
 kitchenPic.alt = "Kitchen";
@@ -81,20 +94,22 @@ kitchenPic.style.top = "0";
 kitchenPic.style.left = "0";
 kitchenPic.style.width = "100%";
 kitchenPic.style.height = "100%";
-kitchenPic.style.zIndex = "-1";
+kitchenPic.style.zIndex = "-2"; 
 kitchenPic.style.objectFit = "cover";
 kitchenPic.style.opacity = "0.2";
 
-//counter for speed rate
+// Counter for speed rate
 const speedRateDisplay = document.createElement("div");
 speedRateDisplay.textContent = "Speed Rate: 0.00 cookies per second";
+speedRateDisplay.style.zIndex = "3";
 
-//purchase history counter
+// Purchase History Display
 const buyDisplay = document.createElement("div");
 buyDisplay.textContent = "Purchased - ";
 buyDisplay.style.padding = "20px";
+buyDisplay.style.zIndex = "3";
 
-//frying pan image
+// Frying Pan Image
 const fryingPanPic = document.createElement("img") as HTMLImageElement;
 fryingPanPic.src = fryingPanLocal;
 fryingPanPic.alt = "frying pan";
@@ -111,47 +126,38 @@ fryingPanResizeable.style.height = "auto";
 fryingPanResizeable.style.transform = "translate(-50%, -50%)";
 fryingPanResizeable.style.zIndex = "1";
 
-const upgradeButton: HTMLButtonElement[] = [];
-const upgradeCount: number[] = Array(availableItems.length).fill(0);
+button.addEventListener("click", ButtonClicks);
 
-//logic for upgrade buttons
-availableItems.forEach((item, index) => {
-  const button2 = document.createElement("Button") as HTMLButtonElement;
-  button2.innerText = `${item.name} (${item.cost} units/sec)`;
-  button2.style.padding = "10px";
-  button2.style.fontSize = "16px";
-  button2.style.marginTop = "10px";
-  button2.style.marginLeft = "10px";
-  button2.disabled = true;
+// Button Click Function
+function ButtonClicks() {
+  counter++;
+  updateDisplay();
+  enableButtons();
+  cookieAnimation();
+}
 
-  // Attach the event listener to the individual upgrade button
-  button2.addEventListener("click", () => {
-    if (counter >= item.cost) {
-      counter -= item.cost;
-      speedRate += item.rate;
-      upgradeCount[index]++;
+// Upgrade Button Click 
+function UpgradeButtons(item: item, index: number) {
+  if (counter >= item.cost) {
+    counter -= item.cost;
+    speedRate += item.rate;
+    upgradeCount[index]++;
 
-      // Increase the cost after each purchase
-      item.cost *= 1.15;
-      item.cost = parseFloat(item.cost.toFixed(2));
-      button2.innerText = `${item.name} (${item.cost.toFixed(2)} units/sec)`;
+    item.cost *= 1.15;
+    item.cost = parseFloat(item.cost.toFixed(2));
+    upgradeButton[index].innerText = `${item.name} (${item.cost.toFixed(2)} units/sec)`;
 
-      updateDisplay();
-      enableButtons();
-    }
-  });
+    updateDisplay();
+    enableButtons();
+  }
+}
 
-  upgradeButton.push(button2);
-  app.append(button2);
-});
-
-//opens up option when players hit the counter req
 function enableButtons() {
   availableItems.forEach((item, index) => {
     upgradeButton[index].disabled = counter < item.cost;
   });
 }
-//updates counters
+
 function updateDisplay() {
   counterDisplay.textContent = `${counter.toFixed(2)} `;
   speedRateDisplay.textContent = `Speed Rate: ${speedRate.toFixed(2)} cookies per second`;
@@ -160,27 +166,35 @@ function updateDisplay() {
     .join(", ")}`;
 }
 
-//tracking counter updates
-function counterUpdate(timeLapse: number) {
+// For tracking counter updates
+function CurrentTimelapse(timeLapse: number) {
   if (time === 0) {
     time = timeLapse;
   }
-
   const delta = timeLapse - time;
-  counter += (delta / 1000) * speedRate;
   time = timeLapse;
-  updateDisplay();
-  requestAnimationFrame(counterUpdate);
+  return delta;
 }
 
-requestAnimationFrame(counterUpdate);
+function UpdateCounter(delta: number) {
+  counter += (delta / 1000) * speedRate;
+  updateDisplay();
+}
 
-//auto click every second
+function CounterUpdates(timeLapse: number) {
+  const delta = CurrentTimelapse(timeLapse);
+  UpdateCounter(delta);
+  requestAnimationFrame(CounterUpdates);
+}
+
+requestAnimationFrame(CounterUpdates);
+
+// Auto Update Every Second
 setInterval(() => {
   updateDisplay();
 }, 1000);
 
-//for elements to appear on the window
+// Append Elements to App
 fryingPanResizeable.append(fryingPanPic);
 fryingPanResizeable.append(counterDisplay);
 app.append(fryingPanResizeable);
