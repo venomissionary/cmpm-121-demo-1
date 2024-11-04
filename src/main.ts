@@ -29,13 +29,16 @@ const upgradeCount: number[] = Array(availableItems.length).fill(0);
 // Header
 const header = document.createElement("h1");
 header.innerHTML = gameName;
-header.style.zIndex = "3"; 
+header.style.zIndex = "3";
 
-// Button and upgrade labels 
+// Button and upgrade labels
 const button = CookieButton("Click me 😩", ButtonClicks);
 const upgradeButton: HTMLButtonElement[] = [];
 availableItems.forEach((item, index) => {
-  const buttonUpgrade = CookieButton(`${item.name} (${item.cost} units/sec)`, () => UpgradeButtons(item, index));
+  const buttonUpgrade = CookieButton(
+    `${item.name} (${item.cost} units/sec)`,
+    () => UpgradeButtons(item, index),
+  );
   buttonUpgrade.style.padding = "10px";
   buttonUpgrade.style.fontSize = "16px";
   buttonUpgrade.style.marginTop = "10px";
@@ -94,7 +97,7 @@ kitchenPic.style.top = "0";
 kitchenPic.style.left = "0";
 kitchenPic.style.width = "100%";
 kitchenPic.style.height = "100%";
-kitchenPic.style.zIndex = "-2"; 
+kitchenPic.style.zIndex = "-2";
 kitchenPic.style.objectFit = "cover";
 kitchenPic.style.opacity = "0.2";
 
@@ -136,7 +139,7 @@ function ButtonClicks() {
   cookieAnimation();
 }
 
-// Upgrade Button Click 
+// Upgrade Button Click
 function UpgradeButtons(item: item, index: number) {
   if (counter >= item.cost) {
     counter -= item.cost;
@@ -145,7 +148,8 @@ function UpgradeButtons(item: item, index: number) {
 
     item.cost *= 1.15;
     item.cost = parseFloat(item.cost.toFixed(2));
-    upgradeButton[index].innerText = `${item.name} (${item.cost.toFixed(2)} units/sec)`;
+    upgradeButton[index].innerText =
+      `${item.name} (${item.cost.toFixed(2)} units/sec)`;
 
     updateDisplay();
     enableButtons();
